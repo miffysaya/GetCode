@@ -118,7 +118,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Common\CodeTemplate.cs" />
+    <Compile Include="Common\GenerateCode.cs" />
     <Compile Include="Common\IdentityAuthorizeAttribute.cs" />
     <Compile Include="Common\Config.cs" />
     <Compile Include="Common\Identity.cs" />

@@ -76,13 +76,106 @@ namespace WebProject.GetCode.Site.Controllers.Sys
 
                 wherePart.ID = model.TableID;
 
-                var tables = Da.Sys.GetAllTables(Config.ConnectionString_Read, wherePart);
+                var columns = Da.Sys.GetColumns(Config.ConnectionString_Read, wherePart);
 
                 actionResult = new AgileJsonResult()
                 {
                     Content = AgileJson.ToJson(new
                     {
-                        result = tables
+                        result = HttpUtility.UrlDecode(GenerateCode.GetEntity(columns, model.TableName))
+                    })
+                };
+            }
+            catch { }
+
+            return actionResult;
+        }
+
+        public ActionResult GenerateDataAccess()
+        {
+            var model = new Mo.SysDatabase();
+
+            UpdateModel(model);
+
+            var actionResult = default(AgileJsonResult);
+
+            try
+            {
+                dynamic wherePart = new ExpandoObject();
+
+                wherePart.DBName = model.DbName;
+
+                wherePart.ID = model.TableID;
+
+                var columns = Da.Sys.GetColumns(Config.ConnectionString_Read, wherePart);
+
+                actionResult = new AgileJsonResult()
+                {
+                    Content = AgileJson.ToJson(new
+                    {
+                        result = HttpUtility.UrlDecode(GenerateCode.GetDataAccess(columns, model.TableName))
+                    })
+                };
+            }
+            catch { }
+
+            return actionResult;
+        }
+
+        public ActionResult GenerateExtraDataAccess()
+        {
+            var model = new Mo.SysDatabase();
+
+            UpdateModel(model);
+
+            var actionResult = default(AgileJsonResult);
+
+            try
+            {
+                dynamic wherePart = new ExpandoObject();
+
+                wherePart.DBName = model.DbName;
+
+                wherePart.ID = model.TableID;
+
+                var columns = Da.Sys.GetColumns(Config.ConnectionString_Read, wherePart);
+
+                actionResult = new AgileJsonResult()
+                {
+                    Content = AgileJson.ToJson(new
+                    {
+                        result = HttpUtility.UrlDecode(GenerateCode.GetExtraDataAccess(columns, model.TableName))
+                    })
+                };
+            }
+            catch { }
+
+            return actionResult;
+        }
+
+        public ActionResult GenerateModel()
+        {
+            var model = new Mo.SysDatabase();
+
+            UpdateModel(model);
+
+            var actionResult = default(AgileJsonResult);
+
+            try
+            {
+                dynamic wherePart = new ExpandoObject();
+
+                wherePart.DBName = model.DbName;
+
+                wherePart.ID = model.TableID;
+
+                var columns = Da.Sys.GetColumns(Config.ConnectionString_Read, wherePart);
+
+                actionResult = new AgileJsonResult()
+                {
+                    Content = AgileJson.ToJson(new
+                    {
+                        result = HttpUtility.UrlDecode(GenerateCode.GenerateModel(columns, model.TableName))
                     })
                 };
             }

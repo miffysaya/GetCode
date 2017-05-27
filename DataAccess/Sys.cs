@@ -1,10 +1,7 @@
 ﻿using AgileFramework.Data;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using En = WebProject.GetCode.Entity;
 
 namespace WebProject.GetCode.DataAccess
@@ -57,7 +54,7 @@ namespace WebProject.GetCode.DataAccess
             {
                 Name = one.Field<string>("Name"),
                 Property = one.Field<string>("Property"),
-                Type = one.Field<string>("Type")
+                Type = one.Field<string>("Type").ToLower()
             }).ToList();
         }
     }
